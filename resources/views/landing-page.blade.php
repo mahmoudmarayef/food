@@ -19,8 +19,13 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo">سوق العدي</div>
-                {{ menu('main', 'partials.menus.main') }}
+                <div class="top-nav-left">
+                    <div class="logo">Ecomrce</div>
+                    {{ menu('main', 'partials.menus.main') }}
+                </div>
+                <div class="top-nav-right">
+                    @include('partials.menus.main-right')
+                </div>
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
@@ -35,7 +40,7 @@
                 </div> <!-- end hero-copy -->
 
                 <div class="hero-image">
-                    <img src="img/log.png" alt="hero image">
+                    <img src="img/5.png" alt="hero image">
                 </div> <!-- end hero-image -->
             </div> <!-- end hero -->
         </header>

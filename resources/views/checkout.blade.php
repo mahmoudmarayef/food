@@ -24,7 +24,7 @@
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li>{!! $error !!}</li>
                     @endforeach
                 </ul>
             </div>
@@ -39,7 +39,12 @@
 
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                        @if (auth()->user())
+                            <!--<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>-->
+                            <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" readonly>
+                        @else
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -131,7 +136,7 @@
                     @foreach (Cart::content() as $item)
                         <div class="checkout-table-row">
                             <div class="checkout-table-row-left">
-                                <img src="{{ productImage($product->image) }}" alt="item" class="checkout-table-img">
+                                <img src="{{ productImage($item->model->image) }}" alt="item" class="checkout-table-img">
                                 <div class="checkout-item-details">
                                     <div class="checkout-table-item">{{ $item->model->name }}</div>
                                     <div class="checkout-table-description">{{ $item->model->details }}</div>
