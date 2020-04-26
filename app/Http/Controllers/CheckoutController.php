@@ -6,10 +6,12 @@ use App\Order;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\OrderPlaced;
 use App\OrderProduct;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Cartalyst\Stripe\Exception\CardErrorException;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -74,7 +76,8 @@ class CheckoutController extends Controller
             ]);
 
             // Insert into orders table
-            $this->addToOrdersTables($request, null);
+            $order = $this->addToOrdersTables($request, null);
+            Mail::send(new OrderPlaced($order));
 
             // SUCCESSFUL
             Cart::instance('default')->destroy();
@@ -160,6 +163,8 @@ class CheckoutController extends Controller
                 'quantity' => $item->qty,
             ]);
         }
+
+        return $order;
     }
 
     private function getNumbers()
