@@ -14,7 +14,9 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
+        "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
+        "nicolaslopezj/searchable": "1.*",
         "olimortimer/laravelshoppingcart": "^4.0",
         "stripe/stripe-php": "^7.28",
         "tcg/voyager": "^1.4"
