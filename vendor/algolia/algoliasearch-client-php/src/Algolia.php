@@ -10,7 +10,7 @@ use Psr\SimpleCache\CacheInterface;
 
 final class Algolia
 {
-    const VERSION = '2.2.0';
+    const VERSION = '2.6.1';
 
     /**
      * Holds an instance of the simple cache repository (PSR-16).
@@ -56,8 +56,6 @@ final class Algolia
 
     /**
      * Sets the cache instance.
-     *
-     * @param \Psr\SimpleCache\CacheInterface $cache
      */
     public static function setCache(CacheInterface $cache)
     {
@@ -80,8 +78,6 @@ final class Algolia
 
     /**
      * Sets the logger instance.
-     *
-     * @param \Psr\Log\LoggerInterface $logger
      */
     public static function setLogger(LoggerInterface $logger)
     {
@@ -91,7 +87,7 @@ final class Algolia
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
-            if (class_exists('\GuzzleHttp\Client')) {
+            if (class_exists('\GuzzleHttp\Client') && 6 === (int) substr(\GuzzleHttp\Client::VERSION, 0, 1)) {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
             } else {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());

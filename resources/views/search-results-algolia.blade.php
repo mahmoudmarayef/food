@@ -1,9 +1,11 @@
 @extends('layout')
 
-@section('title', 'Search Results')
+@section('title', 'Search Results Algolia')
 
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css">
 @endsection
 
 @section('content')
@@ -33,31 +35,32 @@
         @endif
     </div>
 
-    <div class="search-results-container container">
-        <h1>Search Results</h1>
-        <p class="search-results-count">{{ $products->total() }} result(s) for '{{ request()->input('query') }}'</p>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Details</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <th><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></th>
-                        <td>{{ $product->details }}</td>
-                        <td>{{ Str::limit($product->description, 80) }}</td>
-                        <td>{{ $product->presentPrice() }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="search-results-container-algolia">
+            <div>
+                <h2>Search</h2>
+                <div id="search-box">
+                    <!-- SearchBox widget will appear here -->
+                </div>
 
-        {{ $products->appends(request()->input())->links() }}
+                <div id="stats-container"></div>
+
+                <h2>Categories</h2>
+                <div id="refinement-list">
+                    <!-- RefinementList widget will appear here -->
+                </div>
+            </div>
+
+            <div>
+                <div id="hits">
+                    <!-- Hits widget will appear here -->
+                </div>
+
+                <div id="pagination">
+                    <!-- Pagination widget will appear here -->
+                </div>
+            </div>
+        </div>
     </div>
     <!-- end search-container -->
 
@@ -68,4 +71,6 @@
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     <script src="{{ asset('js/algolia.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0"></script>
+    <script src="{{ asset('js/algolia-instantsearch.js') }}"></script>
 @endsection

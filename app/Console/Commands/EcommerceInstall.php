@@ -102,6 +102,14 @@ class EcommerceInstall extends Command
             $this->call('db:seed', [
                 '--class' => 'UsersTableSeederCustom',
             ]);
+
+            $this->call('scout:clear', [
+                'model' => 'App\\Product',
+            ]);
+    
+            $this->call('scout:import', [
+                'model' => 'App\\Product',
+            ]);
     
             $this->info('Dummy data installed');
         }
