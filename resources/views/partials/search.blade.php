@@ -1,4 +1,4 @@
-<div class="aa-input-container" id="aa-input-container">
+<div class="aa-input-container" id="aa-input-container" style="margin-bottom: 5px">
     <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search with algolia..." name="search"
         autocomplete="off" />
     <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
@@ -6,7 +6,7 @@
     </svg>
 </div>
 
-<form action="{{ route('search') }}" method="GET" class="search-form">
+<!--<form action="{{ route('search') }}" method="GET" class="search-form">
     <i class="fa fa-search search-icon"></i>
     <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box" placeholder="Search for product" required>
-</form>
+</form>-->

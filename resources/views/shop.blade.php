@@ -15,7 +15,25 @@
     @endcomponent
     <!-- end breadcrumbs -->
 
-    <div class="container">
+    <div class="hero-wrap hero-bread" style="background-image: url('/img/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Products</span></p>
+            <h1 class="mb-0 bread">Products</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section">
+    	<div class="container">
+        <h1 class="stylish-heading">{{ $categoryName }}</h1>
+                <div>
+                    <strong>Price</strong>
+                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'low_high']) }}">Low To High</a>
+                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'high_low']) }}">High To Low</a>
+                </div>
         @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -31,50 +49,50 @@
                 </ul>
             </div>
         @endif
-    </div>
-
-    <div class="products-section container">
-        <div class="sidebar">
-            <h3>By Category</h3>
-            <ul>
-                @foreach ($categories as $category)
+    		<div class="row justify-content-center">
+    			<div class="col-md-10 mb-5 text-center">
+    				<ul class="product-category">
+                    @foreach ($categories as $category)
                     <li class="{{ setActiveCategory($category->slug) }}"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
-                @endforeach
-            </ul>
-            <!--
-            <h3>By Price</h3>
-            <ul>
-                <li><a href="#">$0 - $700</a></li>
-                <li><a href="#">$700 - $2500</a></li>
-                <li><a href="#">$2500+</a></li>
-            </ul>-->
-        </div> <!-- end sidebar -->
-        <div>
-            <div class="products-header">
-                <h1 class="stylish-heading">{{ $categoryName }}</h1>
-                <div>
-                    <strong>Price</strong>
-                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'low_high']) }}">Low To High</a>
-                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'high_low']) }}">High To Low</a>
-                </div>
-            </div>
-            <div class="products text-center">
+                    @endforeach
+    				</ul>
+    			</div>
+    		</div>
+    		<div class="row">
                 @forelse ($products as $product)
-                    <div class="product">
-                        <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ productImage($product->image) }}" alt="product"></a>
-                        <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
-                        <div class="product-price">{{ $product->presentPrice() }}</div>
-                    </div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="{{ route('shop.show', $product->slug) }}" class="img-prod"><img class="img-fluid" src="{{ productImage($product->image) }}" alt="Colorlib Template">
+    						<div class="overlay"></div>
+    					</a>
+    					<div class="text py-3 pb-4 px-3 text-center">
+    						<h3><a href="{{ route('shop.show', $product->slug) }}">{{ $product->name }}</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price">{{ $product->presentPrice() }}</p>
+		    					</div>
+	    					</div>
+	    					<div class="bottom-area d-flex px-3">
+	    						<div class="m-auto d-flex">
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    								<span><i class="ion-ios-heart"></i></span>
+	    							</a>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+                </div>
                 @empty
                     <div style="text-align: left">No Items found</div>
                 @endforelse
-
-            </div> <!-- end products -->
-
-            <div class="spacer"></div>
-            {{ $products->appends(request()->input())->links() }}
+    		</div>
+    		<div class="row mt-5">
+          <div class="col text-center">
+          {{ $products->appends(request()->input())->links() }}
+          </div>
         </div>
-    </div>
+    	</div>
+    </section>
 
 @endsection
 

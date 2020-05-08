@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layout')
+
+@section('title', 'Reset Password')
 
 @section('content')
 <div class="container">
@@ -44,4 +46,8 @@
         </div>
     </div>
 </div>
+
+<br>
+<br>
+<br>
 @endsection

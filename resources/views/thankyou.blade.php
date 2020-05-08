@@ -3,7 +3,8 @@
 @section('title', 'Thank You')
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 @endsection
 
 @section('body-class', 'sticky-footer')
@@ -19,7 +20,8 @@
        </div>
    </div>
 
-
-
-
+   <br>
+   <br>
+   <br>
+   
 @endsection

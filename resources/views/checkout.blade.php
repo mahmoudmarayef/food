@@ -10,9 +10,20 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="hero-wrap hero-bread" style="background-image: url('/img/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
+            <h1 class="mb-0 bread">Checkout</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        @if (session()->has('success_message'))
+    <section class="ftco-section">
+      <div class="container">
+      @if (session()->has('success_message'))
             <div class="spacer"></div>
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -29,160 +40,155 @@
                 </ul>
             </div>
         @endif
-
-        <h1 class="checkout-heading stylish-heading">Checkout</h1>
-        <div class="checkout-section">
-            <div>
-                <form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
-                    {{ csrf_field()}}
-                    <h2>Billing Details</h2>
-
-                    <div class="form-group">
+        <div class="row justify-content-center">
+          <div class="col-xl-7 ftco-animate">
+						<form action="{{ route('checkout.store') }}" method="POST" id="payment-form" class="billing-form">
+                        {{ csrf_field()}}
+							<h3 class="mb-4 billing-heading">Billing Details</h3>
+	          	<div class="row align-items-end">
+	          		<div class="col-md-6">
+	                <div class="form-group">
                         <label for="email">Email Address</label>
                         @if (auth()->user())
-                            <!--<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>-->
                             <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" readonly>
                         @else
                             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                         @endif
-                    </div>
-                    <div class="form-group">
+	                </div>
+	              </div>
+	              <div class="col-md-6">
+	                <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
-                    </div>
-
-                    <div class="half-form">
-                        <div class="form-group">
-                            <label for="city">City</label>
+	                </div>
+                </div>
+                <div class="w-100"></div>
+		            <div class="col-md-12">
+		            	<div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
+		            	</div>
+		            </div>
+		            <div class="w-100"></div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+	                	    <label for="city">City</label>
                             <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}" required>
-                        </div>
-                        <div class="form-group">
+	                </div>
+                    </div>
+                    <div class="w-100"></div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
                             <label for="province">Province</label>
                             <input type="text" class="form-control" id="province" name="province" value="{{ old('province') }}" required>
-                        </div>
-                    </div> <!-- end half-form -->
-
-                    <div class="half-form">
-                        <div class="form-group">
-                            <label for="postalcode">Postal Code</label>
+	                </div>
+                    </div>
+                    <div class="w-100"></div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+                        <label for="postalcode">Postal Code</label>
                             <input type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
+	                </div>
+		            </div>
+		            <div class="w-100"></div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+	                	    <label for="phone">Phone</label>
                             <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
-                        </div>
-                    </div> <!-- end half-form -->
-
-                    <div class="spacer"></div>
-
-                    <h2>Payment Details</h2>
-
-                    <div class="form-group">
-                        <label for="name_on_card">Name on Card</label>
-                        <input type="text" class="form-control" id="name_on_card" name="name_on_card" value="">
+	                </div>
+		            </div>
+		            <div class="col-md-6">
+		            	<div class="form-group">
+                            <label for="name_on_card">Name on Card</label>
+                            <input type="text" class="form-control" id="name_on_card" name="name_on_card" value="">
+	                    </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="card-element">
-                            Credit or debit card
-                        </label>
-                        <div id="card-element">
-                            <!-- A Stripe Element will be inserted here. -->
-                        </div>
-
-                        <!-- Used to display form errors. -->
-                        <div id="card-errors" role="alert"></div>
-                    </div>
-
-                    <!--<div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cc-number">Credit Card Number</label>
-                        <input type="text" class="form-control" id="cc-number" name="cc-number" value="">
-                    </div>
-
-                    <div class="half-form">
-                        <div class="form-group">
-                            <label for="expiry">Expiry</label>
-                            <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/DD">
-                        </div>
-                        <div class="form-group">
-                            <label for="cvc">CVC Code</label>
-                            <input type="text" class="form-control" id="cvc" name="cvc" value="">
-                        </div>
-                    </div> end half-form-->
-
-                    <div class="spacer"></div>
-
-                    <button type="submit" id="complete-order" class="button-primary full-width">Complete Order</button>
-
-
-                </form>
-            </div>
-
-
-
-            <div class="checkout-table-container">
-                <h2>Your Order</h2>
-
-                <div class="checkout-table">
-                    @foreach (Cart::content() as $item)
-                        <div class="checkout-table-row">
-                            <div class="checkout-table-row-left">
-                                <img src="{{ productImage($item->model->image) }}" alt="item" class="checkout-table-img">
-                                <div class="checkout-item-details">
-                                    <div class="checkout-table-item">{{ $item->model->name }}</div>
-                                    <div class="checkout-table-description">{{ $item->model->details }}</div>
-                                    <div class="checkout-table-price">{{ $item->model->presentPrice() }}</div>
-                                </div>
-                            </div> <!-- end checkout-table -->
-
-                            <div class="checkout-table-row-right">
-                                <div class="checkout-table-quantity">{{ $item->qty }}</div>
+                    <div class="col-md-6">
+		            	<div class="form-group">
+                            <label for="card-element">
+                                Credit or debit card
+                            </label>
+                            <div id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
                             </div>
-                        </div> <!-- end checkout-table-row -->
-                    @endforeach
-                </div> <!-- end checkout-table -->
 
-                <div class="checkout-totals">
-                    <div class="checkout-totals-left">
-                        Subtotal <br>
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>
+	                    </div>
+		            </div>
+		            
+                </div>
+
+                <br>
+                
+                <button type="submit" class="btn btn-primary py-3 px-4" id="complete-order">Complete Order</button>
+	          </form><!-- END -->
+					</div>
+					<div class="col-xl-5">
+	          <div class="row mt-5 pt-3">
+	          	<div class="col-md-12 d-flex mb-5">
+	          		<div class="cart-detail cart-total p-3 p-md-4">
+                          <h3 class="billing-heading mb-4">Cart Total</h3>
+                          @foreach (Cart::content() as $item)
+	          			        <p class="d-flex">
+		    						<span>Name</span>
+		    						<span>{{ $item->model->name }}</span>
+		    					</p>
+		    					<p class="d-flex">
+		    						<span>Details</span>
+		    						<span>{{ $item->model->details }}</span>
+		    					</p>
+		    					<p class="d-flex">
+		    						<span>Price</span>
+		    						<span>{{ $item->model->presentPrice() }}</span>
+		    					</p>
+		    					<p class="d-flex total-price">
+		    						<span>Qty</span>
+		    						<span>{{ $item->qty }}</span>
+                                </p>
+                                <hr>
+                                @endforeach
+								</div>
+	          	</div>
+	          	<div class="col-md-12 d-flex mb-5">
+	          		<div class="cart-detail cart-total p-3 p-md-4">
+                        <h3 class="billing-heading mb-4">Payment Method</h3>
+                        <p class="d-flex">
+		    				<span>Subtotal</span>
+		    				<span>{{ presentPrice(Cart::subtotal()) }}</span>
+                        </p>
                         @if (session()->has('coupon'))
-                            Discount ({{ session()->get('coupon')['name'] }}) :
-                            <form action="{{ route('coupon.destroy') }}" method="POST" style="display: inline">
+                        <p class="d-flex">
+		    				<span>
+                                Discount ({{ session()->get('coupon')['name'] }}) :
+                            </span>
+                            <span>
+                                -{{ presentPrice($discount) }}
+                                <form action="{{ route('coupon.destroy') }}" method="POST" style="display: inline">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
                                 <button type="submit" style="font-size: 14px">Remove</button>
-                            </form> <br>
-                            <hr>
-                            New Subtotal <br>
+                                </form>
+                            </span>
+                        </p>
+                        <p class="d-flex">
+                            <span>New Subtotal</span>
+		    				<span>{{ presentPrice($newSubtotal) }}</span>
+                        </p>
                         @endif
-                        Tax (14%) <br>
-                        <span class="checkout-totals-total">Total</span>
-
-                    </div>
-
-                    <div class="checkout-totals-right">
-                        {{ presentPrice(Cart::subtotal()) }} <br>
-                        @if (session()->has('coupon'))
-                            -{{ presentPrice($discount) }} <br>
-                            <hr>
-                            {{ presentPrice($newSubtotal) }} <br>
-                        @endif
-                        {{ presentPrice($newTax) }} <br>
-                        <span class="checkout-totals-total">{{ presentPrice($newTotal) }}</span>
-
-                    </div>
-                </div> <!-- end checkout-totals -->
-
-                @if (!session()->has('coupon'))
+                        <p class="d-flex">
+		    				<span>Tax (14%)</span>
+		    				<span>{{ presentPrice($newTax) }}</span>
+                        </p>
+                        <p class="d-flex">
+		    				<span>Total</span>
+		    				<span>{{ presentPrice($newTotal) }}</span>
+                        </p>			
+					</div>
+	          	</div>
+              </div>
+              
+              @if (!session()->has('coupon'))
                     <a href="#" class="have-code">Have a Code?</a>
 
                     <div class="have-code-container">
@@ -193,11 +199,10 @@
                         </form>
                     </div> <!-- end have-code-container -->
                 @endif
-
-            </div>
-
-        </div> <!-- end checkout-section -->
-    </div>
+          </div> <!-- .col-md-8 -->
+        </div>
+      </div>
+    </section> <!-- .section -->
 
 @endsection
 

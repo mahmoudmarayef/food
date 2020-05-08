@@ -13,16 +13,16 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
 
-        // Laptops
+        // Vegetables
         for ($i = 1; $i <= 30; $i++) {
             Product::create([
-                'name' => 'Laptop' . $i,
-                'slug' => 'Laptop-' . $i,
-                'details' => [13, 14, 15][array_rand([13, 14, 15])] . ' inch, ' . [1, 2, 3][array_rand([1, 2, 3])] . ' TB SSD, 32GB RAM',
+                'name' => 'Vegetables' . $i,
+                'slug' => 'vegetables-' . $i,
+                'details' => 'Fresh natural vegetables picked from our farms',
                 'price' => rand(149999, 249999),
                 'description' => 'Loren ' . $i . ' ipsun dolor sit anet, consectetur adipisicing elit. Ipsun tenporibus iusto ipsa, asperiores
                 voluptas unde aspernatur praesentium in? Aliquan, dolore',
-                'image' => 'products/dummy/laptop-'.$i.'.jpg',
+                'image' => 'products/dummy/vegetables-'.$i.'.jpg',
                 'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
             ])->categories()->attach(1);
         }
@@ -30,83 +30,70 @@ class ProductTableSeeder extends Seeder
         $product = Product::find(1);
         $product->categories()->attach(2);
 
-        // Desktops
+        // Fruits
         for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'Desktop' . $i,
-                'slug' => 'desktop-' . $i,
-                'details' => [24, 25, 27][array_rand([24, 25, 27])] . ' inch, ' . [1, 2, 3][array_rand([1, 2, 3])] . ' TB SSD, 32GB RAM',
+                'name' => 'Fruits' . $i,
+                'slug' => 'fruits-' . $i,
+                'details' => 'Fresh natural fruits picked from our farms',
                 'price' => rand(249999, 449999),
                 'description' => 'Loren ' . $i . ' ipsun dolor sit anet, consectetur adipisicing elit. Ipsun tenporibus iusto ipsa, asperiores
                 voluptas unde aspernatur praesentium in? Aliquan, dolore',
-                'image' => 'products/dummy/desktop-'.$i.'.jpg',
+                'image' => 'products/dummy/fruits-'.$i.'.jpg',
                 'images' => '["products\/dummy\/desktop-2.jpg","products\/dummy\/desktop-3.jpg","products\/dummy\/desktop-4.jpg"]',
             ])->categories()->attach(2);
         }
 
-        // Phones
+        // Juices
         for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'Phone ' . $i,
-                'slug' => 'phone-' . $i,
-                'details' => [16, 32, 64][array_rand([16, 32, 64])] . 'GB, 5.' . [7, 8, 9][array_rand([7, 8, 9])] . ' inch screen, 4GHz Quad Core',
+                'name' => 'Juices ' . $i,
+                'slug' => 'juices-' . $i,
+                'details' => 'Fresh natural Juices picked from our store',
                 'price' => rand(79999, 149999),
                 'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/phone-'.$i.'.jpg',
+                'image' => 'products/dummy/juices-'.$i.'.jpg',
                 'images' => '["products\/dummy\/phone-2.jpg","products\/dummy\/phone-3.jpg","products\/dummy\/phone-4.jpg"]',
             ])->categories()->attach(3);
         }
 
-        // Tablets
+        // Nuts
         for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'Tablet ' . $i,
-                'slug' => 'tablet-' . $i,
-                'details' => [16, 32, 64][array_rand([16, 32, 64])] . 'GB, 5.' . [10, 11, 12][array_rand([10, 11, 12])] . ' inch screen, 4GHz Quad Core',
+                'name' => 'Nuts ' . $i,
+                'slug' => 'nuts-' . $i,
+                'details' => 'Fresh natural nuts picked from our store',
                 'price' => rand(49999, 149999),
                 'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/tablet-'.$i.'.jpg',
+                'image' => 'products/dummy/nuts-'.$i.'.jpg',
                 'images' => '["products\/dummy\/tablet-2.jpg","products\/dummy\/tablet-3.jpg","products\/dummy\/tablet-4.jpg"]',
             ])->categories()->attach(4);
         }
 
-        // TVs
+        // Legumes
         for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'TV ' . $i,
-                'slug' => 'tv-' . $i,
-                'details' => [46, 50, 60][array_rand([7, 8, 9])] . ' inch screen, Smart TV, 4K',
+                'name' => 'Legumes ' . $i,
+                'slug' => 'legumes-' . $i,
+                'details' => 'Fresh natural Legumes picked from our store',
                 'price' => rand(79999, 149999),
                 'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/tv-'.$i.'.jpg',
+                'image' => 'products/dummy/legumes-'.$i.'.jpg',
                 'images' => '["products\/dummy\/tv-2.jpg","products\/dummy\/tv-3.jpg","products\/dummy\/tv-4.jpg"]',
             ])->categories()->attach(5);
         }
 
-        // Cameras
+        // Detergents
         for ($i = 1; $i <= 9; $i++) {
             Product::create([
-                'name' => 'Camera ' . $i,
-                'slug' => 'camera-' . $i,
-                'details' => 'Full Frame DSLR, with 18-55mm kit lens.',
+                'name' => 'Detergents ' . $i,
+                'slug' => 'detergents-' . $i,
+                'details' => 'Fresh natural detergents picked from our store',
                 'price' => rand(79999, 249999),
                 'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/camera-'.$i.'.jpg',
+                'image' => 'products/dummy/detergents-'.$i.'.jpg',
                 'images' => '["products\/dummy\/camera-2.jpg","products\/dummy\/camera-3.jpg","products\/dummy\/camera-4.jpg"]',
             ])->categories()->attach(6);
-        }
-
-        // Appliances
-        for ($i = 1; $i <= 9; $i++) {
-            Product::create([
-                'name' => 'Appliance ' . $i,
-                'slug' => 'appliance-' . $i,
-                'details' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, dolorum!',
-                'price' => rand(79999, 149999),
-                'description' => 'Lorem ' . $i . ' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
-                'image' => 'products/dummy/appliance-'.$i.'.jpg',
-                'images' => '["products\/dummy\/appliance-2.jpg","products\/dummy\/appliance-3.jpg","products\/dummy\/appliance-4.jpg"]',
-            ])->categories()->attach(7);
         }
 
         // Select random entries to be featured

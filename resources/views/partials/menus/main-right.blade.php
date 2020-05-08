@@ -1,10 +1,10 @@
-<ul>
+<ul class="navbar-nav ml-auto">
     @guest
-    <li><a href="{{ route('register') }}">Sign Up</a></li>
-    <li><a href="{{ route('login') }}">Login</a></li>
+    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Sign Up</a></li>
+    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
     @else
-    <li>
-    <a class="dropdown-item" href="{{ route('logout') }}"
+    <li class="nav-item">
+    <a class="nav-link" href="{{ route('logout') }}"
         onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
         {{ __('Logout') }}
@@ -15,8 +15,11 @@
         @csrf
     </form>
     @endguest
-    <li><a href="{{ route('cart.index') }}">Cart</a></li>
+    <li class="nav-item cta cta-colored"><a href="{{ route('cart.index') }}" class="nav-link">Cart
     @if (Cart::instance('default')->count() > 0)
-    <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
+    <span class="icon-shopping_cart">[{{ Cart::instance('default')->count() }}]</span>
     @endif
+    <li class="nav-item cta cta-colored"><a href="{{ route('wishlist.index') }}" class="nav-link">Wishlist
+    </a>
+    </li>
 </ul>
